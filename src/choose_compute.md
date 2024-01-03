@@ -49,4 +49,42 @@
 
 ### 管理維運
 
-https://cloud.google.com/architecture/framework/system-design/compute?hl=zh-cn#manage-ops
+*  使用 Google 提供的公共映像
+   *  Google Cloud 公共映像會定期更新
+   *  可以使用特定配置[創建自己的映像](https://cloud.google.com/compute/docs/images/create-delete-deprecate-private-images?hl=zh-cn)
+   
+* 使用快照進行實例備份
+  * 快照特別適合用於有狀態應用
+  * 有狀態應用不夠靈活，在遭受突然關停時無法保留狀態或保存進度
+
+* 使用機器映像可創建虛擬機實例
+  * 快照只會補捉機器內部的數據映像，但機器映像除了捕獲數據之外，還會捕獲機器配置和設置
+  * 使用[機器映像](https://cloud.google.com/compute/docs/machine-images/create-machine-images?hl=zh-cn)可以存儲創建虛擬機實例所需的一個或多個磁盤的所有配置、元數據、權限和資料
+  * 使用機器映像可讓這些只知設置複製到新機器上，從而減少開銷: [何時使用機器映像](https://cloud.google.com/compute/docs/machine-images?hl=zh-cn#when-to-use)
+
+### 容量、預留和隔離
+
+* 使用承諾使用折扣減少費用
+* 選擇機器類型以支持費用和性能
+* 使用單租戶節點以滿足合規性需求
+  * 單租戶節點是專門用於託管專案虛擬機實例的物理 Compute Engine 服務器
+  * 將你的虛擬機與其他項目中的虛擬機進行物理隔離
+  * 將你的虛擬機匯集到同一主機硬體中
+  * 隔離付款處理工作負載
+
+* 使用預留確保資源可用性
+  * Google Cloud 允許你為工作負載定義[預留](https://cloud.google.com/compute/docs/instances/reserving-zonal-resources?hl=zh-cn)，以確保這些資源始終可用
+  * 創建預留不會產生額外費用，但即使不使用預留資源，你也需要支付費用
+    * [使用和管理預留](https://cloud.google.com/compute/docs/instances/reserving-zonal-resources?hl=zh-cn)
+
+
+### 虛擬機遷移
+
+* 評估內置的遷移工具，以便將工作負載從其他雲平台或本地環境遷移
+  * [遷移到 Google Cloud](https://cloud.google.com/architecture/migration-to-gcp-getting-started?hl=zh-cn)
+  * [Google Cloud Rapid Assessment & Migration Program](https://cloud.google.com/solutions/cloud-migration-program?hl=zh-cn)
+
+* 使用導入虛擬磁盤以導入自定義的操作系統
+  * [受支持的操作系統](https://cloud.google.com/compute/docs/images/os-details?hl=zh-cn#import)
+  * [導入虛擬磁盤](https://cloud.google.com/compute/docs/import/importing-virtual-disks?hl=zh-cn)
+
